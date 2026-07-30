@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+    <title>Svarog Team birthdays</title>
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.19/index.global.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="hero">
+        <h1>SVAROG TEAM</h1>
+        <p>🎉 Дні народження</p>
+    </div>
+
+    <div class="today-card hidden" id="todayBirthdays">
+        <h2>🎂 Дні народження сьогодні</h2>
+        <div id="todayList"></div>
+    </div>
+
+    <div class="calendar-controls">
+    <!-- <select id="monthSelect">
+        <option value="0">Січень</option>
+        <option value="1">Лютий</option>
+        <option value="2">Березень</option>
+        <option value="3">Квітень</option>
+        <option value="4">Травень</option>
+        <option value="5">Червень</option>
+        <option value="6">Липень</option>
+        <option value="7">Серпень</option>
+        <option value="8">Вересень</option>
+        <option value="9">Жовтень</option>
+        <option value="10">Листопад</option>
+        <option value="11">Грудень</option>
+    </select> -->
+</div>
+    <div id="calendar"></div>
+
+    <div class="upcoming">
+        <h2>Найближчі Дні народження</h2>
+        <div id="upcomingList"></div>
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.19/index.global.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.19/locales-all.global.min.js"></script>
+
+<script>
+async function loadEmployees() {
+    const response = await fetch('./data/employees.json');
+    return await response.json();
+}
+
+function getBirthdayDateForYear(birthday, year) {
+    const date = new Date(birthday);
+    return `${year}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+}
+
+function getUpcomingBirthdays(employees) {
+    const today = new Date();
+
+    return employees
+        .map(emp => {
+            const birth = new Date(emp.birthday);
+
+            let nextBirthday = new Date(
+                today.getFullYear(),
+                birth.getMonth(),
+                birth.getDate()
+            );
+
+            if (nextBirthday < today) {
+                nextBirthday.setFullYear(today.getFullYear() + 1);
+            }
+
+            return {
+                ...emp,
+                nextBirthday
+            };
+        })
+        .sort((a, b) => a.nextBirthday - b.nextBirthday)
+        .slice(0, 10);
+}
+
+function renderUpcoming(employees) {
+    const container = document.getElementById('upcomingList');
+
+    getUpcomingBirthdays(employees).forEach(emp => {
+        const div = document.createElement('div');
+        div.className = 'birthday-item';
+
+        div.innerHTML = `
+            <strong>${emp.name}</strong><br>
+            ${emp.nextBirthday.toLocaleDateString('uk-UA', {
+                day: 'numeric',
+                month: 'long'
+            })}
+        `;
+
+        container.appendChild(div);
+    });
+}
+
+function renderTodayBirthdays(employees) {
+    const today = new Date();
+
+    const birthdays = employees.filter(emp => {
+        const birth = new Date(emp.birthday);
+
+        return (
+            birth.getDate() === today.getDate() &&
+            birth.getMonth() === today.getMonth()
+        );
+    });
+
+    if (!birthdays.length) return;
+
+    document.getElementById('todayBirthdays')
+        .classList.remove('hidden');
+
+    document.getElementById('todayList').innerHTML =
+        birthdays.map(emp => `<p>${emp.name}</p>`).join('');
+}
+
+async function initCalendar() {
+
+    const employees = await loadEmployees();
+
+    renderUpcoming(employees);
+    renderTodayBirthdays(employees);
+
+    const currentYear = new Date().getFullYear();
+
+    const events = employees.map(emp => ({
+        title: `${emp.name}`,
+        start: getBirthdayDateForYear(
+            emp.birthday,
+            currentYear
+        ),
+        allDay: true
+    }));
+
+    const calendar = new FullCalendar.Calendar(
+    document.getElementById('calendar'),
+    {
+        locale: 'uk',
+        firstDay: 1,
+        initialView: 'dayGridMonth',
+        height: 'auto',
+
+        buttonText: {
+            today: 'Сьогодні'
+        },
+
+        events,
+        eventClick(info) {
+            alert(info.event.title);
+        }
+    }
+);
+
+    calendar.render();
+
+//     const monthSelect = document.getElementById('monthSelect');
+
+// monthSelect.value = calendar.getDate().getMonth();
+
+// monthSelect.addEventListener('change', function () {
+
+//     const currentDate = calendar.getDate();
+
+//     let year = currentDate.getFullYear();
+
+//     const currentMonth = currentDate.getMonth();
+//     const selectedMonth = parseInt(this.value);
+
+//     if (currentMonth === 11 && selectedMonth === 0) {
+//         year++;
+//     }
+
+//     if (currentMonth === 0 && selectedMonth === 11) {
+//         year--;
+//     }
+
+//     calendar.gotoDate(new Date(year, selectedMonth, 1));
+
+// });
+}
+
+initCalendar();
+</script>
+
+</body>
+</html>

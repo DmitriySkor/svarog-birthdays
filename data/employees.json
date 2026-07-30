@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "name": "Іван Петренко",
+    "position": "Frontend Developer",
+    "birthday": "1990-08-15",
+    "photo": ""
+  },
+  {
+    "id": 2,
+    "name": "Олена Коваленко",
+    "position": "Project Manager",
+    "birthday": "1988-09-03",
+    "photo": ""
+  },
+  {
+    "id": 3,
+    "name": "Тест Тестович",
+    "position": "Project Manager",
+    "birthday": "1988-07-30",
+    "photo": ""
+  },
+  {
+    "id": 3,
+    "name": "Іван Піддубний",
+    "position": "Project Manager",
+    "birthday": "1988-07-30",
+    "photo": ""
+  },
+  {
+    "id": 3,
+    "name": "Максим Рильський",
+    "position": "Project Manager",
+    "birthday": "1988-07-30",
+    "photo": ""
+  }
+
+]
