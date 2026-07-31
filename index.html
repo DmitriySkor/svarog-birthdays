@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="uk">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,35 +8,54 @@
     <title>Svarog Team birthdays</title>
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.19/index.global.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
 
-<div class="container">
+    <div class="container">
 
-    <div class="hero">
-        <h1>SVAROG TEAM</h1>
-        <p>🎉 Дні народження</p>
-    </div>
+        <!-- <div class="hero">
+            <span class="section-label">Внутрішній сервіс</span>
+            <h1>SVAROG TEAM</h1>
+            <p>Календар днів народження команди</p>
+        </div> -->
 
-    <div class="today-card hidden" id="todayBirthdays">
-        <h2>🎂 Дні народження сьогодні</h2>
-        <div id="todayList"></div>
-    </div>
+        <div class="hero">
 
-    <div class="calendar-controls">
-    
-</div>
-    <div id="calendar"></div>
+    <span class="hero-label">
+        SVAROG TEAM
+    </span>
 
-    <div class="upcoming">
-        <h2>Найближчі Дні народження</h2>
-        <div id="upcomingList"></div>
-    </div>
+    <h1>
+        Дні народження
+    </h1>
 
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.19/index.global.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.19/locales-all.global.min.js"></script>
-<script type="module" src="js/app.js"></script>
+        <div class="today-card section-box hidden" id="todayBirthdays">
+            <h2>Дні народження сьогодні</h2>
+            <div id="todayList"></div>
+        </div>
+
+        <div class="calendar-controls"></div>
+        <div id="calendar"></div>
+
+        <div class="upcoming section-box">
+            <h2>Найближчі Дні народження</h2>
+            <div id="upcomingList"></div>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.19/index.global.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.19/locales-all.global.min.js"></script>
+    <script type="module" src="js/app.js"></script>
 </body>
+
 </html>

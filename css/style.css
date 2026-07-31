@@ -6,14 +6,16 @@
 
         body {
             font-family: Arial, sans-serif;
-            background: #f5f7fa;
-            color: #333;
+            margin: 0;
+            background: #090b0f;
+            color: #fff;
+            font-family: Inter, sans-serif;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 60px 24px;
         }
 
         .hero {
@@ -21,26 +23,57 @@
             margin-bottom: 40px;
         }
 
+        .hero-label {
+            display: inline-block;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: #ffffff;
+            margin-bottom: 16px;
+        }
+
         .hero h1 {
+            margin: 0;
             font-size: 42px;
-            margin-bottom: 10px;
+            line-height: 1.1;
+            font-weight: 700;
+            letter-spacing: .14em;
+        }
+
+        @media (max-width:768px) {
+            .hero h1 {
+                font-size: 31px;
+            }
         }
 
         .hero p {
-            color: #666;
+            margin-top: 16px;
+            color: rgba(255, 255, 255, .65);
+            font-size: 18px;
         }
 
-        .today-card {
-            background: #fff4d6;
-            border: 1px solid #ffe08a;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 30px;
+        .section-box,
+        #calendar {
+            background: #10141c;
+            border: 1px solid rgba(255, 255, 255, .08);
+            border-radius: 8px;
         }
 
-        .today-card h2{
-            font-size: 20px;
-            margin-bottom: 10px;
+        .today-card,
+        .upcoming {
+            padding: 32px;
+            margin-bottom: 24px;
+        }
+
+        .today-card h2,
+        .upcoming h2 {
+            margin: 0 0 24px;
+            color: #d77a52;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: .25em;
         }
 
         .today-card.hidden {
@@ -48,27 +81,18 @@
         }
 
         #calendar {
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 5px 20px rgba(0,0,0,.05);
+            padding: 24px;
+            margin-bottom: 24px;
         }
 
-        .upcoming {
-            margin-top: 40px;
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 5px 20px rgba(0,0,0,.05);
-        }
 
-        .upcoming h2 {
-            margin-bottom: 20px;
-        }
 
         .birthday-item {
-            padding: 10px 0;
-            border-bottom: 1px solid #eee;
+            background: rgba(255, 255, 255, .02);
+            border: 1px solid rgba(255, 255, 255, .08);
+            border-radius: 6px;
+            padding: 16px 20px;
+            margin-bottom: 12px;
         }
 
         .birthday-item:last-child {
@@ -81,34 +105,150 @@
 
         /* CALENDAR */
 
-        .fc-toolbar-chunk{
+        .fc-theme-standard td,
+        .fc-theme-standard th {
+            border-color: rgba(255, 255, 255, .08);
+        }
+
+        .fc .fc-col-header-cell {
+            background: #333842;
+        }
+
+        .fc .fc-daygrid-day-number {
+            color: #ffffff;
+        }
+
+        .fc-toolbar-title {
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: .05em;
+        }
+
+        .fc-event {
+            background: #d77a52 !important;
+            border: none !important;
+            color: #ffffff !important;
+        }
+
+        .fc-button {
+            background: transparent !important;
+            border: 1px solid #d77a52 !important;
+        }
+
+        .fc-button:hover {
+            background: #d77a52 !important;
+        }
+
+
+        .fc-toolbar-chunk {
             display: flex;
         }
 
         @media (max-width: 768px) {
 
-    .fc-daygrid-event {
-        white-space: normal !important;
-        font-size: 11px;
-        line-height: 1.2;
-    }
+            .fc-daygrid-event {
+                white-space: normal !important;
+                font-size: 11px;
+                line-height: 1.2;
+            }
 
-    .fc-event-title {
-        white-space: normal !important;
-    }
+            .fc-event-title {
+                white-space: normal !important;
+            }
 
-    .fc .fc-toolbar-title{
-        font-size: 20px !important;
-    }
+            .fc .fc-toolbar-title {
+                font-size: 20px !important;
+            }
 
-}
+        }
 
-/* ADMIN PANEL */
+        .fc-theme-standard .fc-scrollgrid {
+            border-color: rgba(255, 255, 255, .08);
+        }
 
-#message {
-    min-height: 24px;
-    margin: 10px 0;
-    font-weight: 600;
-    color: green;
-}
+        .fc .fc-col-header-cell {
+            border-top: 0;
+        }
 
+        .fc .fc-scrollgrid-section-sticky > *{
+            background: transparent !important;
+        }
+
+        /* ADMIN PANEL */
+
+        #message {
+            min-height: 24px;
+            margin: 10px 0;
+            font-weight: 600;
+            color: green;
+        }
+
+
+        .admin-wrapper {
+            max-width: 900px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        h1 {
+            font-size: 14px;
+            letter-spacing: .25em;
+            text-transform: uppercase;
+            color: #d77a52;
+            margin-bottom: 40px;
+        }
+
+        #authBlock {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+        }
+
+        input {
+            background: #10141c;
+            border: 1px solid rgba(255, 255, 255, .08);
+            color: #fff;
+            padding: 12px 16px;
+            border-radius: 4px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #d77a52;
+        }
+
+        button {
+            background: transparent;
+            border: 1px solid #d77a52;
+            color: #fff;
+            padding: 12px 20px;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        button:hover {
+            background: #d77a52;
+        }
+
+        #employeeForm {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+
+        .employee-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #10141c;
+            border: 1px solid rgba(255, 255, 255, .08);
+            padding: 16px 20px;
+            margin-bottom: 12px;
+        }
+
+        #message {
+            color: #d77a52;
+            margin-bottom: 20px;
+            min-height: 24px;
+        }

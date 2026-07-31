@@ -72,6 +72,7 @@ async function renderEmployees() {
     employees.forEach(employee => {
 
         const item = document.createElement('div');
+        item.className = 'employee-card';
 
         item.innerHTML = `
         <strong>${employee.name}</strong>

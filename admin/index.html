@@ -6,48 +6,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Адмінка - Дні народження</title>
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
+    <div class="admin-wrapper">
 
-    <h1>SVAROG TEAM</h1>
+        <h1>SVAROG TEAM</h1>
 
-    <div id="authBlock">
+        <div id="authBlock">
 
-        <input type="email" id="email" placeholder="Email">
+            <input type="email" id="email" placeholder="Email">
 
-        <input type="password" id="password" placeholder="Пароль">
+            <input type="password" id="password" placeholder="Пароль">
 
-        <button id="loginBtn">
-            Увійти
-        </button>
-
-        <button id="logoutBtn" style="display:none;">
-            Вийти
-        </button>
-
-    </div>
-    <div id="adminContent" style="display:none;">
-        <div id="message"></div>
-        <form id="employeeForm">
-            <input type="text" id="name" placeholder="Ім'я" required>
-
-            <input type="date" id="birthday" required>
-
-            <button type="submit">
-                Додати
+            <button id="loginBtn">
+                Увійти
             </button>
-            <button type="button" id="cancelEdit">
-                Скасувати
+
+            <button id="logoutBtn" style="display:none;">
+                Вийти
             </button>
-        </form>
-        <hr>
 
-        <div id="employeesList"></div>
-    </div>
+        </div>
+        <div id="adminContent" style="display:none;">
+            <div id="message"></div>
+            <form id="employeeForm">
+                <input type="text" id="name" placeholder="Ім'я" required>
 
-    <script type="module" src="../js/admin.js"></script>
+                <input type="date" id="birthday" required>
+
+                <button type="submit">
+                    Додати
+                </button>
+                <button type="button" id="cancelEdit">
+                    Скасувати
+                </button>
+            </form>
+
+            <div id="employeesList"></div>
+        </div>
+
+        <script type="module" src="../js/admin.js"></script>
 
 </body>
+</div>
 
 </html>
