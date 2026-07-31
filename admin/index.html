@@ -5,29 +5,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Адмінка - Дні народження</title>
-     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
 
     <h1>SVAROG TEAM</h1>
 
-    <div id="message"></div>
-    <form id="employeeForm">
-        <input type="text" id="name" placeholder="Ім'я" required>
+    <div id="authBlock">
 
-        <input type="date" id="birthday" required>
+        <input type="email" id="email" placeholder="Email">
 
-        <button type="submit">
-            Додати
+        <input type="password" id="password" placeholder="Пароль">
+
+        <button id="loginBtn">
+            Увійти
         </button>
-        <button type="button" id="cancelEdit">
-            Скасувати
-        </button>
-    </form>
-    <hr>
 
-    <div id="employeesList"></div>
+        <button id="logoutBtn" style="display:none;">
+            Вийти
+        </button>
+
+    </div>
+    <div id="adminContent" style="display:none;">
+        <div id="message"></div>
+        <form id="employeeForm">
+            <input type="text" id="name" placeholder="Ім'я" required>
+
+            <input type="date" id="birthday" required>
+
+            <button type="submit">
+                Додати
+            </button>
+            <button type="button" id="cancelEdit">
+                Скасувати
+            </button>
+        </form>
+        <hr>
+
+        <div id="employeesList"></div>
+    </div>
 
     <script type="module" src="../js/admin.js"></script>
 

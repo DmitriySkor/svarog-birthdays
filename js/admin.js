@@ -2,14 +2,43 @@ import {
     getEmployees,
     addEmployee,
     deleteEmployee,
-    updateEmployee
+    updateEmployee,
+    login,
+    logout,
+    authState
 } from './firebase.js';
 
 const form = document.getElementById('employeeForm');
 const list = document.getElementById('employeesList');
+const message = document.getElementById('message');
+const loginBtn = document.getElementById('loginBtn');
+const logoutBtn = document.getElementById('logoutBtn');
+const emailInput = document.getElementById('email');
+const passwordInput = document.getElementById('password');
+const adminContent = document.getElementById('adminContent');
 let editingId = null;
 
-const message = document.getElementById('message');
+loginBtn.addEventListener('click', async () => {
+
+    try {
+
+        await login(
+            emailInput.value,
+            passwordInput.value
+        );
+
+    } catch (error) {
+
+        alert('Невірний логін або пароль');
+
+        console.error(error);
+    }
+});
+
+logoutBtn.addEventListener('click', async () => {
+
+    await logout();
+});
 
 function showMessage(text) {
 
@@ -32,8 +61,8 @@ document.getElementById('cancelEdit')
     });
 
 async function renderEmployees() {
-
     const employees = await getEmployees();
+    
     employees.sort((a, b) =>
         a.name.localeCompare(b.name, 'uk')
     );
@@ -128,4 +157,32 @@ form.addEventListener('submit', async (e) => {
     renderEmployees();
 });
 
-renderEmployees();
+const ALLOWED_EMAIL = 'rionskey@gmail.com';
+
+authState(user => {
+    
+
+    if (user) {
+
+        try {
+
+            loginBtn.style.display = 'none';
+            logoutBtn.style.display = 'inline-block';
+            adminContent.style.display = 'block';
+            emailInput.style.display = 'none';
+            passwordInput.style.display = 'none';
+
+            renderEmployees();
+
+        } catch (error) {
+            console.error('AUTH BLOCK ERROR:', error);
+        }
+
+    } else {
+        loginBtn.style.display = 'inline-block';
+        logoutBtn.style.display = 'none';
+        adminContent.style.display = 'none';
+        emailInput.style.display = 'inline-block';
+        passwordInput.style.display = 'inline-block';
+    }
+});

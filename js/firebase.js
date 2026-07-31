@@ -10,17 +10,25 @@ import {
     updateDoc
 } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
 
+import {
+    getAuth,
+    signInWithEmailAndPassword,
+    signOut,
+    onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
+
 const firebaseConfig = {
-    apiKey: "AIzaSyA8VXmkXbjF4qTLx06VDGp6UXSCBhPVJ6",
-    authDomain: "svarog-birthdays.firebaseapp.com",
-    projectId: "svarog-birthdays",
-    storageBucket: "svarog-birthdays.firebasestorage.app",
-    messagingSenderId: "223994779378",
-    appId: "1:223994779378:web:78397482981f8bd310a26b"
+  apiKey: "AIzaSyA8VXmkXbjF4qTLx06VDGp6UXSCBhPVJ6Y",
+  authDomain: "svarog-birthdays.firebaseapp.com",
+  projectId: "svarog-birthdays",
+  storageBucket: "svarog-birthdays.firebasestorage.app",
+  messagingSenderId: "223994779378",
+  appId: "1:223994779378:web:78397482981f8bd310a26b"
 };
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const auth = getAuth(app);
 
 export async function getEmployees() {
 
@@ -54,6 +62,28 @@ export async function updateEmployee(id, employee) {
     await updateDoc(
         doc(db, "employees", id),
         employee
+    );
+}
+
+export async function login(email, password) {
+
+    return await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+    );
+}
+
+export async function logout() {
+
+    return await signOut(auth);
+}
+
+export function authState(callback) {
+
+    return onAuthStateChanged(
+        auth,
+        callback
     );
 }
 
