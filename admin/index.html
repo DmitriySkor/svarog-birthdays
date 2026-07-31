@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Дні народження</title>
+</head>
+<body>
+
+    <h1>SVAROG TEAM</h1>
+
+    <form id="employeeForm">
+        <input
+            type="text"
+            id="name"
+            placeholder="Ім'я"
+            required
+        >
+
+        <input
+            type="date"
+            id="birthday"
+            required
+        >
+
+        <button type="submit">
+            Додати
+        </button>
+    </form>
+
+    <hr>
+
+    <div id="employeesList"></div>
+
+    <script type="module" src="../js/admin.js"></script>
+
+</body>
+</html>

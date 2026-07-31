@@ -1,8 +1,12 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
+
 import {
     getFirestore,
     collection,
-    getDocs
+    getDocs,
+    addDoc,
+    deleteDoc,
+    doc
 } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -27,4 +31,19 @@ export async function getEmployees() {
         id: doc.id,
         ...doc.data()
     }));
+}
+
+export async function addEmployee(employee) {
+
+    await addDoc(
+        collection(db, "employees"),
+        employee
+    );
+}
+
+export async function deleteEmployee(id) {
+
+    await deleteDoc(
+        doc(db, "employees", id)
+    );
 }
