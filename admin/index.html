@@ -1,33 +1,30 @@
 <!DOCTYPE html>
 <html lang="uk">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Адмінка - Дні народження</title>
+     <link rel="stylesheet" href="/css/style.css">
 </head>
+
 <body>
 
     <h1>SVAROG TEAM</h1>
 
+    <div id="message"></div>
     <form id="employeeForm">
-        <input
-            type="text"
-            id="name"
-            placeholder="Ім'я"
-            required
-        >
+        <input type="text" id="name" placeholder="Ім'я" required>
 
-        <input
-            type="date"
-            id="birthday"
-            required
-        >
+        <input type="date" id="birthday" required>
 
         <button type="submit">
             Додати
         </button>
+        <button type="button" id="cancelEdit">
+            Скасувати
+        </button>
     </form>
-
     <hr>
 
     <div id="employeesList"></div>
@@ -35,4 +32,5 @@
     <script type="module" src="../js/admin.js"></script>
 
 </body>
+
 </html>

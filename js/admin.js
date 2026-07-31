@@ -9,6 +9,28 @@ const form = document.getElementById('employeeForm');
 const list = document.getElementById('employeesList');
 let editingId = null;
 
+const message = document.getElementById('message');
+
+function showMessage(text) {
+
+    message.textContent = text;
+
+    setTimeout(() => {
+        message.textContent = '';
+    }, 3000);
+}
+
+document.getElementById('cancelEdit')
+    .addEventListener('click', () => {
+
+        form.reset();
+
+        editingId = null;
+
+        document.querySelector('#employeeForm button[type="submit"]')
+            .textContent = 'Додати співробітника';
+    });
+
 async function renderEmployees() {
 
     const employees = await getEmployees();
@@ -61,6 +83,7 @@ async function renderEmployees() {
             await deleteEmployee(employee.id);
 
             renderEmployees();
+            showMessage('✓ Співробітника видалено');
         });
 
         list.appendChild(item);
@@ -84,11 +107,15 @@ form.addEventListener('submit', async (e) => {
             employeeData
         );
 
+        showMessage('✓ Зміни збережено');
+
     } else {
 
         await addEmployee(
             employeeData
         );
+
+        showMessage('✓ Співробітника додано');
     }
 
     form.reset();
