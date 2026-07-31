@@ -6,7 +6,8 @@ import {
     getDocs,
     addDoc,
     deleteDoc,
-    doc
+    doc,
+    updateDoc
 } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -47,3 +48,12 @@ export async function deleteEmployee(id) {
         doc(db, "employees", id)
     );
 }
+
+export async function updateEmployee(id, employee) {
+
+    await updateDoc(
+        doc(db, "employees", id),
+        employee
+    );
+}
+
