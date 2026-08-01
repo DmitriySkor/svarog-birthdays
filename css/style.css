@@ -49,7 +49,7 @@
             }
         }
 
-        .admin-wrapper h1{
+        .admin-wrapper h1 {
             color: #ffffff;
             font-size: 16px;
         }
@@ -176,7 +176,7 @@
             border-top: 0;
         }
 
-        .fc .fc-scrollgrid-section-sticky > *{
+        .fc .fc-scrollgrid-section-sticky>* {
             background: transparent !important;
         }
 
@@ -246,11 +246,11 @@
         }
 
         @media (max-width:576px) {
-            #employeeForm{
-                flex-wrap:wrap;
+            #employeeForm {
+                flex-wrap: wrap;
             }
 
-            #employeeForm input{
+            #employeeForm input {
                 width: 100%;
             }
         }
@@ -266,9 +266,9 @@
         }
 
         @media (max-width: 576px) {
-            .employee-card{
+            .employee-card {
                 flex-wrap: wrap;
-                gap:20px;
+                gap: 20px;
             }
         }
 
@@ -278,17 +278,22 @@
             min-height: 24px;
         }
 
-        .employee_info{
+        .employee_info {
             display: flex;
-            gap:30px;
+            gap: 30px;
         }
 
-        .employee_btn{
+        .employee_btn {
             display: flex;
-            gap:20px;
+            gap: 20px;
         }
 
-        #searchEmployee{
+        #searchEmployee {
             margin-bottom: 20px;
             width: 100%;
+        }
+
+        #employeesList {
+            max-height: 600px;
+            overflow-y: auto;
         }
