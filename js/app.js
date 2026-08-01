@@ -1,8 +1,34 @@
-import { getEmployees } from './firebase.js';
+import {
+     getEmployees,
+     login,
+     authState 
+    } from './firebase.js';
+
+    const loginBtn = document.getElementById('loginBtn');
+    const calendarContent = document.getElementById('calendarContent');
 
 async function loadEmployees() {
     return await getEmployees();
 }
+
+
+    loginBtn.addEventListener(
+    'click',
+    async () => {
+
+        try {
+
+            await login(
+                document.getElementById('email').value,
+                document.getElementById('password').value
+            );
+
+        } catch (error) {
+
+            alert('Невірний логін або пароль');
+        }
+    }
+);
 
 function getBirthdayDateForYear(birthday, year) {
     const date = new Date(birthday);
@@ -36,22 +62,32 @@ function getUpcomingBirthdays(employees) {
 }
 
 function renderUpcoming(employees) {
-    const container = document.getElementById('upcomingList');
 
-    getUpcomingBirthdays(employees).forEach(emp => {
-        const div = document.createElement('div');
-        div.className = 'birthday-item';
+    const container =
+        document.getElementById('upcomingList');
 
-        div.innerHTML = `
-            <strong>${emp.name}</strong><br>
-            ${emp.nextBirthday.toLocaleDateString('uk-UA', {
-            day: 'numeric',
-            month: 'long'
-        })}
-        `;
+    container.innerHTML = '';
 
-        container.appendChild(div);
-    });
+    getUpcomingBirthdays(employees)
+        .forEach(emp => {
+
+            const div = document.createElement('div');
+
+            div.className = 'birthday-item';
+
+            div.innerHTML = `
+                <strong>${emp.name}</strong><br>
+                ${emp.nextBirthday.toLocaleDateString(
+                    'uk-UA',
+                    {
+                        day: 'numeric',
+                        month: 'long'
+                    }
+                )}
+            `;
+
+            container.appendChild(div);
+        });
 }
 
 function renderTodayBirthdays(employees) {
@@ -83,10 +119,11 @@ async function initCalendar() {
     renderUpcoming(employees);
     renderTodayBirthdays(employees);
 
-    const currentYear = new Date().getFullYear();
+    const currentYear =
+        new Date().getFullYear();
 
     const events = employees.map(emp => ({
-        title: `${emp.name}`,
+        title: emp.name,
         start: getBirthdayDateForYear(
             emp.birthday,
             currentYear
@@ -94,28 +131,50 @@ async function initCalendar() {
         allDay: true
     }));
 
-    const calendar = new FullCalendar.Calendar(
-        document.getElementById('calendar'),
-        {
-            locale: 'uk',
-            firstDay: 1,
-            initialView: 'dayGridMonth',
-            height: 'auto',
+    const calendar =
+        new FullCalendar.Calendar(
+            document.getElementById('calendar'),
+            {
+                locale: 'uk',
+                firstDay: 1,
+                initialView: 'dayGridMonth',
+                height: 'auto',
 
-            buttonText: {
-                today: 'Сьогодні'
-            },
+                buttonText: {
+                    today: 'Сьогодні'
+                },
 
-            events,
-            eventClick(info) {
-                alert(info.event.title);
+                events,
+
+                eventClick(info) {
+                    alert(info.event.title);
+                }
             }
-        }
-    );
+        );
 
     calendar.render();
-
-
 }
 
-initCalendar();
+authState(async user => {
+
+    if (user) {
+
+        document
+            .getElementById('authBlock')
+            .style.display = 'none';
+
+        calendarContent.style.display =
+            'block';
+
+        await initCalendar();
+
+    } else {
+
+        document
+            .getElementById('authBlock')
+            .style.display = 'block';
+
+        calendarContent.style.display =
+            'none';
+    }
+});

@@ -18,9 +18,17 @@
             padding: 60px 24px;
         }
 
+        .login-wrapper {
+            max-width: 900px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
         .hero {
             text-align: center;
             margin-bottom: 40px;
+            /* background-image: url(../assets/images/logo.png);
+            background-repeat: no-repeat; */
         }
 
         .hero-label {
@@ -207,7 +215,7 @@
         }
 
         #authBlock {
-            display: flex;
+            display: flex !important;
             gap: 12px;
             margin-bottom: 32px;
             flex-wrap: wrap;
