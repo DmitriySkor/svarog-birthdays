@@ -49,6 +49,11 @@
             }
         }
 
+        .admin-wrapper h1{
+            color: #ffffff;
+            font-size: 16px;
+        }
+
         .hero p {
             margin-top: 16px;
             color: rgba(255, 255, 255, .65);
@@ -240,6 +245,16 @@
             margin-bottom: 32px;
         }
 
+        @media (max-width:576px) {
+            #employeeForm{
+                flex-wrap:wrap;
+            }
+
+            #employeeForm input{
+                width: 100%;
+            }
+        }
+
         .employee-card {
             display: flex;
             align-items: center;
@@ -250,8 +265,25 @@
             margin-bottom: 12px;
         }
 
+        @media (max-width: 576px) {
+            .employee-card{
+                flex-wrap: wrap;
+                gap:20px;
+            }
+        }
+
         #message {
             color: #d77a52;
             margin-bottom: 20px;
             min-height: 24px;
+        }
+
+        .employee_info{
+            display: flex;
+            gap:30px;
+        }
+
+        .employee_btn{
+            display: flex;
+            gap:20px;
         }

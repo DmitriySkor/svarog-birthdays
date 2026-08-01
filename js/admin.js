@@ -60,6 +60,16 @@ document.getElementById('cancelEdit')
             .textContent = 'Додати співробітника';
     });
 
+function formatBirthday(dateString) {
+
+    const date = new Date(dateString);
+
+    return date.toLocaleDateString('uk-UA', {
+        day: 'numeric',
+        month: 'long'
+    });
+}
+
 async function renderEmployees() {
     const employees = await getEmployees();
     
@@ -75,9 +85,11 @@ async function renderEmployees() {
         item.className = 'employee-card';
 
         item.innerHTML = `
-        <strong>${employee.name}</strong>
-        (${employee.birthday})
-
+        <div class="employee_info">
+            <strong>${employee.name}</strong>
+            ${formatBirthday(employee.birthday)}
+        </div>
+        <div class="employee_btn">
         <button class="edit-btn">
             Редагувати
         </button>
@@ -85,6 +97,7 @@ async function renderEmployees() {
         <button class="delete-btn">
             Видалити
         </button>
+        </div>
     `;
 
         const editBtn = item.querySelector('.edit-btn');
