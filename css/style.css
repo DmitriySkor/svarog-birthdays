@@ -287,3 +287,8 @@
             display: flex;
             gap:20px;
         }
+
+        #searchEmployee{
+            margin-bottom: 20px;
+            width: 100%;
+        }

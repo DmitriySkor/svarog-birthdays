@@ -17,6 +17,8 @@ const emailInput = document.getElementById('email');
 const passwordInput = document.getElementById('password');
 const adminContent = document.getElementById('adminContent');
 let editingId = null;
+let allEmployees = [];
+
 
 loginBtn.addEventListener('click', async () => {
 
@@ -66,12 +68,19 @@ function formatBirthday(dateString) {
 
     return date.toLocaleDateString('uk-UA', {
         day: 'numeric',
-        month: 'long'
+        month: 'long',
+        year: 'numeric'
     });
 }
 
 async function renderEmployees() {
-    const employees = await getEmployees();
+    allEmployees = await getEmployees();
+
+allEmployees.sort((a, b) =>
+    a.name.localeCompare(b.name, 'uk')
+);
+
+const employees = allEmployees;
     
     employees.sort((a, b) =>
         a.name.localeCompare(b.name, 'uk')
@@ -82,6 +91,7 @@ async function renderEmployees() {
     employees.forEach(employee => {
 
         const item = document.createElement('div');
+        item.classList.add('employee-card');
         item.className = 'employee-card';
 
         item.innerHTML = `
@@ -130,6 +140,26 @@ async function renderEmployees() {
         });
 
         list.appendChild(item);
+    });
+}
+
+function filterEmployees() {
+
+    const query = document
+        .getElementById('searchEmployee')
+        .value
+        .toLowerCase();
+
+    const items = document.querySelectorAll('.employee-card');
+
+    items.forEach(item => {
+
+        const text = item.textContent.toLowerCase();
+
+        item.style.display =
+            text.includes(query)
+                ? ''
+                : 'none';
     });
 }
 
@@ -200,3 +230,7 @@ authState(user => {
         passwordInput.style.display = 'inline-block';
     }
 });
+
+document
+    .getElementById('searchEmployee')
+    .addEventListener('input', filterEmployees);
