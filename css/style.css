@@ -68,6 +68,14 @@
             font-size: 18px;
         }
 
+        .main_auth{
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
         .section-box,
         #calendar {
             background: #10141c;
@@ -215,7 +223,6 @@
         }
 
         #authBlock {
-            display: flex !important;
             gap: 12px;
             margin-bottom: 32px;
             flex-wrap: wrap;

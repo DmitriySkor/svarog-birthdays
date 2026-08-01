@@ -1,10 +1,12 @@
 import {
      getEmployees,
      login,
+     logout,
      authState 
     } from './firebase.js';
 
     const loginBtn = document.getElementById('loginBtn');
+    const logoutBtn = document.getElementById('logoutBtn');
     const calendarContent = document.getElementById('calendarContent');
 
 async function loadEmployees() {
@@ -27,6 +29,14 @@ async function loadEmployees() {
 
             alert('Невірний логін або пароль');
         }
+    }
+);
+
+logoutBtn.addEventListener(
+    'click',
+    async () => {
+
+        await logout();
     }
 );
 
@@ -159,22 +169,32 @@ authState(async user => {
 
     if (user) {
 
-        document
-            .getElementById('authBlock')
+        loginBtn.style.display = 'none';
+
+        document.getElementById('email')
             .style.display = 'none';
 
-        calendarContent.style.display =
-            'block';
+        document.getElementById('password')
+            .style.display = 'none';
+
+        logoutBtn.style.display = 'inline-block';
+
+        calendarContent.style.display = 'block';
 
         await initCalendar();
 
     } else {
 
-        document
-            .getElementById('authBlock')
-            .style.display = 'block';
+        document.getElementById('email')
+            .style.display = 'inline-block';
 
-        calendarContent.style.display =
-            'none';
+        document.getElementById('password')
+            .style.display = 'inline-block';
+
+        loginBtn.style.display = 'inline-block';
+
+        logoutBtn.style.display = 'none';
+
+        calendarContent.style.display = 'none';
     }
 });
