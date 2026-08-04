@@ -335,3 +335,14 @@
             gap: 12px;
             margin: 20px 0;
         }
+
+        .employees-counter {
+            margin: 20px 0 12px;
+            color: rgba(255, 255, 255, .65);
+            font-size: 14px;
+        }
+
+        .employees-counter strong {
+            color: #d77a52;
+            font-weight: 600;
+        }

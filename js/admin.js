@@ -76,17 +76,17 @@ function formatBirthday(dateString) {
 }
 
 async function renderEmployees() {
+
     allEmployees = await getEmployees();
 
-allEmployees.sort((a, b) =>
-    a.name.localeCompare(b.name, 'uk')
-);
-
-const employees = allEmployees;
-    
-    employees.sort((a, b) =>
+    allEmployees.sort((a, b) =>
         a.name.localeCompare(b.name, 'uk')
     );
+
+    document.getElementById('totalEmployees')
+        .textContent = allEmployees.length;
+
+    const employees = allEmployees;
 
     list.innerHTML = '';
 
@@ -94,7 +94,6 @@ const employees = allEmployees;
 
         const item = document.createElement('div');
         item.classList.add('employee-card');
-        item.className = 'employee-card';
 
         item.innerHTML = `
         <div class="employee_info">
@@ -102,15 +101,15 @@ const employees = allEmployees;
             ${formatBirthday(employee.birthday)}
         </div>
         <div class="employee_btn">
-        <button class="edit-btn">
-            Редагувати
-        </button>
+            <button class="edit-btn">
+                Редагувати
+            </button>
 
-        <button class="delete-btn">
-            Видалити
-        </button>
+            <button class="delete-btn">
+                Видалити
+            </button>
         </div>
-    `;
+        `;
 
         const editBtn = item.querySelector('.edit-btn');
         const deleteBtn = item.querySelector('.delete-btn');
@@ -138,6 +137,7 @@ const employees = allEmployees;
             await deleteEmployee(employee.id);
 
             renderEmployees();
+
             showMessage('✓ Співробітника видалено');
         });
 
@@ -206,7 +206,7 @@ form.addEventListener('submit', async (e) => {
 const ALLOWED_EMAIL = 'rionskey@gmail.com';
 
 authState(user => {
-    
+
 
     if (user) {
 
