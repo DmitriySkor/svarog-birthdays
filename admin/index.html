@@ -9,7 +9,9 @@
     <link rel="icon" type="image/png" href="../assets/images/favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&display=swap"
+        rel="stylesheet">
 
 </head>
 
@@ -41,18 +43,23 @@
                 <input type="date" id="birthday" required>
 
                 <button type="submit">
-                    Додати  
+                    Додати
                 </button>
                 <button type="button" id="cancelEdit">
                     Скасувати
                 </button>
             </form>
             <input type="text" id="searchEmployee" placeholder="Пошук співробітника...">
+            <div class="backup-actions">
+                <button id="exportBtn">Експорт JSON</button>
+                <input type="file" id="importFile" accept=".json" style="display:none;">
+                <button id="importBtn">Імпорт JSON</button>
+            </div>
             <div id="employeesList"></div>
         </div>
-        </div>
+    </div>
 
-        <script type="module" src="../js/admin.js"></script>
+    <script type="module" src="../js/admin.js"></script>
 
 </body>
 

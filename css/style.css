@@ -34,7 +34,7 @@
             align-items: center;
         }
 
-        img.hero_bg{
+        img.hero_bg {
             position: absolute;
             z-index: -1;
             width: 100%;
@@ -81,7 +81,7 @@
             font-size: 18px;
         }
 
-        .main_auth{
+        .main_auth {
             display: flex;
             flex-direction: column;
             width: 100%;
@@ -96,7 +96,7 @@
             border-radius: 8px;
         }
 
-        #calendar{
+        #calendar {
             position: relative;
         }
 
@@ -328,4 +328,10 @@
         #employeesList {
             max-height: 600px;
             overflow-y: auto;
+        }
+
+        .backup-actions {
+            display: flex;
+            gap: 12px;
+            margin: 20px 0;
         }

@@ -5,7 +5,9 @@ import {
     updateEmployee,
     login,
     logout,
-    authState
+    authState,
+    exportEmployees,
+    importEmployees
 } from './firebase.js';
 
 const form = document.getElementById('employeeForm');
@@ -234,3 +236,69 @@ authState(user => {
 document
     .getElementById('searchEmployee')
     .addEventListener('input', filterEmployees);
+
+document
+    .getElementById('exportBtn')
+    .addEventListener('click', async () => {
+
+        const data =
+            await exportEmployees();
+
+        const blob = new Blob(
+            [JSON.stringify(data, null, 2)],
+            {
+                type: 'application/json'
+            }
+        );
+
+        const url =
+            URL.createObjectURL(blob);
+
+        const a =
+            document.createElement('a');
+
+        a.href = url;
+
+        a.download =
+            'employees-backup.json';
+
+        a.click();
+
+        URL.revokeObjectURL(url);
+    });
+
+
+document
+    .getElementById('importBtn')
+    .addEventListener('click', () => {
+
+        document
+            .getElementById('importFile')
+            .click();
+    });
+
+document
+    .getElementById('importFile')
+    .addEventListener('change', async e => {
+
+        const file = e.target.files[0];
+
+        if (!file) return;
+
+        const text = await file.text();
+
+        const data = JSON.parse(text);
+
+        if (!confirm(`Імпортувати ${data.length} записів?`)) {
+            return;
+        }
+
+        const result =
+            await importEmployees(data);
+
+        renderEmployees();
+
+        showMessage(
+            `✓ Додано: ${result.imported}, пропущено: ${result.skipped}`
+        );
+    });

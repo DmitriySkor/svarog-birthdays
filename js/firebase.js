@@ -87,3 +87,54 @@ export function authState(callback) {
     );
 }
 
+export async function exportEmployees() {
+
+    const snapshot = await getDocs(
+        collection(db, "employees")
+    );
+
+    return snapshot.docs.map(doc => ({
+        ...doc.data()
+    }));
+}
+
+export async function importEmployees(data) {
+
+    const snapshot = await getDocs(
+        collection(db, "employees")
+    );
+
+    const existingEmployees =
+        snapshot.docs.map(doc => doc.data());
+
+    let imported = 0;
+    let skipped = 0;
+
+    for (const employee of data) {
+
+        const exists =
+            existingEmployees.some(existing =>
+                existing.name === employee.name &&
+                existing.birthday === employee.birthday
+            );
+
+        if (!exists) {
+
+            await addDoc(
+                collection(db, "employees"),
+                employee
+            );
+
+            imported++;
+
+        } else {
+
+            skipped++;
+        }
+    }
+
+    return {
+        imported,
+        skipped
+    };
+}
