@@ -1,0 +1,29 @@
+name: Birthday Notifications
+
+on:
+
+  workflow_dispatch:
+
+  schedule:
+    - cron: '0 6 * * *'
+
+jobs:
+
+  notify:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - run: npm install
+
+      - run: node scripts/check-birthdays.js
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
