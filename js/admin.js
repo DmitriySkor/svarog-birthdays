@@ -75,6 +75,54 @@ function formatBirthday(dateString) {
     });
 }
 
+function renderAgeStats(employees) {
+
+    const today = new Date();
+
+    const groups = {
+        age25_35: 0,
+        age36_45: 0,
+        age46_55: 0,
+        age56_60: 0
+    };
+
+    employees.forEach(employee => {
+
+        const birth = new Date(employee.birthday);
+
+        let age =
+            today.getFullYear() - birth.getFullYear();
+
+        const birthdayThisYear =
+            new Date(
+                today.getFullYear(),
+                birth.getMonth(),
+                birth.getDate()
+            );
+
+        if (birthdayThisYear > today) {
+            age--;
+        }
+
+        if (age >= 25 && age <= 35) {
+            groups.age25_35++;
+        } else if (age >= 36 && age <= 45) {
+            groups.age36_45++;
+        } else if (age >= 46 && age <= 55) {
+            groups.age46_55++;
+        } else if (age >= 56 && age <= 60) {
+            groups.age56_60++;
+        }
+    });
+
+    Object.entries(groups).forEach(([id, count]) => {
+
+        document.getElementById(id)
+            .textContent = count;
+
+    });
+}
+
 async function renderEmployees() {
 
     allEmployees = await getEmployees();
@@ -85,6 +133,8 @@ async function renderEmployees() {
 
     document.getElementById('totalEmployees')
         .textContent = allEmployees.length;
+
+    renderAgeStats(allEmployees);
 
     const employees = allEmployees;
 

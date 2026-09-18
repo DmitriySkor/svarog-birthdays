@@ -346,3 +346,25 @@
             color: #d77a52;
             font-weight: 600;
         }
+
+        .age-stats{
+            margin-bottom: 10px;   
+        }
+
+        .age-stats-title{
+            color: rgba(255, 255, 255, .65);
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .age-stats-list{
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+        }
+
+        .age-list-wrap{
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
